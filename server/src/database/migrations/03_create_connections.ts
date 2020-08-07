@@ -12,8 +12,8 @@ export async function up(knex: Knex) {
             .onUpdate('CASCADE'); // altera a informação aqui também
 
         table.timestamp('created_at')
-            .defaultTo('CURRENT_TIMESTAMP')
-            .notNullable
+            .defaultTo(knex.raw('CURRENT_TIMESTAMP'))
+            .notNullable();
     })
 }
 
