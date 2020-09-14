@@ -4,10 +4,10 @@ export async function up(knex: Knex) {
     return knex.schema.createTable('connections', table => {
         table.increments('id').primary();
 
-        table.integer('user_id')
+        table.integer('teacher_id')
             .notNullable()
             .references('id')
-            .inTable('users')
+            .inTable('teachers')
             .onDelete('CASCADE') //deletar todas as aulas do professor, quando deleta o professor
             .onUpdate('CASCADE'); // altera a informação aqui também
 
