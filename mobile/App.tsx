@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 
 import { AppLoading } from "expo";
@@ -14,7 +14,17 @@ import {
 
 import AppStack from "./src/routes/AppStack";
 
-export default function App() {
+import Routes from "./src/routes/";
+
+import AuthContext from "./src/contexts/auth";
+
+const App: React.FC = () => {
+  const [signed, setSigned] = useState(false);
+
+  function signIn() {
+    // const response = await signIn();
+    // console.log(response);
+  }
   let [fontsLoaded] = useFonts({
     Archivo_400Regular,
     Archivo_700Bold,
@@ -26,10 +36,13 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <>
-        <AppStack/>
+      <AuthContext.Provider value={{ signed }}>
+        <AppStack />
+        {/* <Routes /> */}
         <StatusBar style="light" />
-      </>
+      </AuthContext.Provider>
     );
   }
-}
+};
+
+export default App;
