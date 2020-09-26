@@ -3,6 +3,12 @@ import db from '../database/connection';
 import * as bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
+declare var process: {
+    env: {
+        APP_SECRET: string
+    }
+}
+
 export default class StudentsController {
     async login(req: Request, res: Response) {
         const { email, password } = req.body
@@ -13,7 +19,7 @@ export default class StudentsController {
         if (user.length === 1) {
             if (await bcrypt.compare(password, user[0].password)) {
                 const token = jwt.sign({ id: user[0].id }, process.env.APP_SECRET, {
-                    expiresIn: '1d'
+                    expiresIn: '6h'
                 })
 
                 const data = {
