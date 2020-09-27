@@ -10,8 +10,8 @@ const classesControllers = new ClassesController();
 const connectionsController = new ConnectionsController();
 const usersController = new UsersController();
 
-routes.post('/signup', usersController.signUp);
-routes.post('/login', usersController.signIn);
+routes.post('/api/signup', usersController.signUp);
+routes.post('/api/login', usersController.signIn);
 
 routes.get('/api/connections', authMiddleware, connectionsController.index);
 routes.post('/api/connections', authMiddleware, connectionsController.create);
