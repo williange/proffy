@@ -10,9 +10,9 @@ declare var process: {
 }
 
 export default class StudentsController {
-    async login(req: Request, res: Response) {
+    async signIn(req: Request, res: Response) {
         const { email, password } = req.body
-        const user = await db('students').where({
+        const user = await db('users').where({
             email: email
         })
 
@@ -39,14 +39,14 @@ export default class StudentsController {
     }
 
     async index(req: Request, res: Response) {
-        const user = await db('students').select();
+        const user = await db('users').select();
 
         return res.json(user);
     }
-    async create(req: Request, res: Response) {
+    async signUp(req: Request, res: Response) {
         const { name, email, lastname, password } = req.body;
 
-        const user = await db('students').where({
+        const user = await db('users').where({
             email: email
         })
 
@@ -56,13 +56,16 @@ export default class StudentsController {
 
         const passwordHash = await bcrypt.hash(password, 8)
 
-        await db('students').insert({
-            name,
-            email,
-            lastname,
-            password: passwordHash
-        })
+        const userData = {
+            name: name,
+            lastname: lastname,
+            email: email,
+            password: passwordHash,
+            avatar: "https://t3.ftcdn.net/jpg/00/64/67/80/240_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg",
+        }
 
-        return res.status(201).send();
+        await db('users').insert(userData);
+
+        return res.status(201).send(userData);
     }
 }
