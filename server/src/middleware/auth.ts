@@ -7,7 +7,7 @@ declare var process: {
     }
 }
 
-export const auth = async (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization
 
     if (!authHeader) {
