@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Button from '../../components/Button'
 
 import Input from '../../components/Input'
 
@@ -58,9 +59,7 @@ function Login() {
         ) : (
           <></>
         )}
-        <button onClick={login} type="submit">
-          Enviar
-        </button>
+        <Button handler={login} type="submit" text="Entrar"/>
       </form>
     )
 }

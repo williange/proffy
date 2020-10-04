@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Button from '../../components/Button'
 
 import Input from '../../components/Input'
 
@@ -74,9 +75,7 @@ function SignUp() {
       ) : (
         <></>
       )}
-      <button onClick={signUp} type="submit">
-        Enviar
-      </button>
+      <Button handler={signUp} type="submit" text="Concluir cadastro" />
     </form>
   )
 }
